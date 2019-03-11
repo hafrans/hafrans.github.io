@@ -3,19 +3,20 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Chuuka の　Notes</title>
+  <title>宝塔面板PHP7安装Oracle扩展 | Chuuka の　Notes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="只是简单的笔记，都是一些小笔记，以后可能会替换掉ibytes">
-<meta name="keywords" content="Hafrans,ibytes">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chuuka の　Notes">
-<meta property="og:url" content="http://hafrans.github.io/index.html">
+  <meta name="description" content="[TOC] ##前言自从认识了宝塔面板这个好东西之后，我觉得我可以把我用了4年之久的Kloxo-MR面板换掉了。具体是如何的面板以及其如何的好用，我在此就不再“推销”了。可以进入宝塔官网看一看。 ##需求 最近做一个项目，要求PHP的后端连接Oracle数据库，原想使用宝塔的“安装扩展”的功能来简单添加，可是并没有发现有该选项的存在。所以只能求助于自己编译和安装扩展了 虽然本教程是在安装有bt面板">
+<meta name="keywords" content="宝塔,PHP,Oracle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="宝塔面板PHP7安装Oracle扩展">
+<meta property="og:url" content="http://hafrans.github.io/2019/03/11/bt-php-oracle-from-ibytes/index.html">
 <meta property="og:site_name" content="Chuuka の　Notes">
-<meta property="og:description" content="只是简单的笔记，都是一些小笔记，以后可能会替换掉ibytes">
+<meta property="og:description" content="[TOC] ##前言自从认识了宝塔面板这个好东西之后，我觉得我可以把我用了4年之久的Kloxo-MR面板换掉了。具体是如何的面板以及其如何的好用，我在此就不再“推销”了。可以进入宝塔官网看一看。 ##需求 最近做一个项目，要求PHP的后端连接Oracle数据库，原想使用宝塔的“安装扩展”的功能来简单添加，可是并没有发现有该选项的存在。所以只能求助于自己编译和安装扩展了 虽然本教程是在安装有bt面板">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2019-03-11T03:08:24.344Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chuuka の　Notes">
-<meta name="twitter:description" content="只是简单的笔记，都是一些小笔记，以后可能会替换掉ibytes">
+<meta name="twitter:title" content="宝塔面板PHP7安装Oracle扩展">
+<meta name="twitter:description" content="[TOC] ##前言自从认识了宝塔面板这个好东西之后，我觉得我可以把我用了4年之久的Kloxo-MR面板换掉了。具体是如何的面板以及其如何的好用，我在此就不再“推销”了。可以进入宝塔官网看一看。 ##需求 最近做一个项目，要求PHP的后端连接Oracle数据库，原想使用宝塔的“安装扩展”的功能来简单添加，可是并没有发现有该选项的存在。所以只能求助于自己编译和安装扩展了 虽然本教程是在安装有bt面板">
   
     <link rel="alternate" href="/atom.xml" title="Chuuka の　Notes" type="application/atom+xml">
   
@@ -72,9 +73,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-bt-php-oracle-from-ibytes" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-bt-php-oracle-from-ibytes" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/11/bt-php-oracle-from-ibytes/" class="article-date">
   <time datetime="2019-03-11T03:05:45.000Z" itemprop="datePublished">2019-03-11</time>
@@ -87,8 +86,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/11/bt-php-oracle-from-ibytes/">宝塔面板PHP7安装Oracle扩展</a>
+    <h1 class="article-title" itemprop="name">
+      宝塔面板PHP7安装Oracle扩展
     </h1>
   
 
@@ -168,10 +167,64 @@
     </footer>
   </div>
   
+    
+ <script src="/jquery/jquery.min.js"></script>
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+  
 </article>
  
-
-
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+            <div id="SOHUCS" sid="2019/03/11/bt-php-oracle-from-ibytes/"> </div>
+    
+      
+      
+  </div>
+ 
   
 
 </section>
@@ -179,181 +232,32 @@
     <aside id="sidebar">
   
     
-  <div class="widget-wrap">
-     
-        <h3 class="follow-title ">Follow me</h3>
-     
-    <div class="widget follow">
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
       
-              <a class="github" aria-hidden="true" href="https://github.com/hafrans" target="_blank" title="Github"></a>
-      
-      
-            <a class="weibo" aria-hidden="true" href="http://weibo.com/hafrans" target="_blank" title="微博"></a>
-      
-      
-              <a class="zhihu" aria-hidden="true" href="http://www.zhihu.com/people/hafrans" target="_blank" title="知乎"></a>
-      
-      
-            <a class="email" aria-hidden="true" href="mailto:chuukaro@yahoo.co.jp" target="_blank" title="邮箱"></a>
-      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">##前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">2.</span> <span class="toc-text">##需求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装OCI8"><span class="toc-number">2.1.</span> <span class="toc-text">安装OCI8</span></a></li></ol></li></ol>
+          </div>
+      </div>
     </div>
-  </div>
 
+  
+    
 
   
     
   
     
+  
+    
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title tagcloud">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/宝塔-PHP-Oracle/" style="font-size: 14px;">宝塔,PHP,Oracle</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title recent-posts">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2019/03/11/bt-php-oracle-from-ibytes/">宝塔面板PHP7安装Oracle扩展</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title archive">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-<div class="widget-wrap">
-    <h3 class="widget-title">Links</h3>
-    <div class="widget">
-        <ul>
-            
-            <li>
-                <a href="i">0</a>
-            </li>
-            
-            <li>
-                <a href="b">1</a>
-            </li>
-            
-            <li>
-                <a href="y">2</a>
-            </li>
-            
-            <li>
-                <a href="t">3</a>
-            </li>
-            
-            <li>
-                <a href="e">4</a>
-            </li>
-            
-            <li>
-                <a href="s">5</a>
-            </li>
-            
-            <li>
-                <a href=".">6</a>
-            </li>
-            
-            <li>
-                <a href="c">7</a>
-            </li>
-            
-            <li>
-                <a href="n">8</a>
-            </li>
-            
-            <li>
-                <a href=" ">9</a>
-            </li>
-            
-            <li>
-                <a href="h">10</a>
-            </li>
-            
-            <li>
-                <a href="t">11</a>
-            </li>
-            
-            <li>
-                <a href="t">12</a>
-            </li>
-            
-            <li>
-                <a href="p">13</a>
-            </li>
-            
-            <li>
-                <a href=":">14</a>
-            </li>
-            
-            <li>
-                <a href="/">15</a>
-            </li>
-            
-            <li>
-                <a href="/">16</a>
-            </li>
-            
-            <li>
-                <a href="i">17</a>
-            </li>
-            
-            <li>
-                <a href="b">18</a>
-            </li>
-            
-            <li>
-                <a href="y">19</a>
-            </li>
-            
-            <li>
-                <a href="t">20</a>
-            </li>
-            
-            <li>
-                <a href="e">21</a>
-            </li>
-            
-            <li>
-                <a href="s">22</a>
-            </li>
-            
-            <li>
-                <a href=".">23</a>
-            </li>
-            
-            <li>
-                <a href="c">24</a>
-            </li>
-            
-            <li>
-                <a href="n">25</a>
-            </li>
-            
-        </ul>
-    </div>
-</div>
-
   
 </aside>
 
